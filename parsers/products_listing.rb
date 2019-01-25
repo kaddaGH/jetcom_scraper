@@ -11,7 +11,6 @@ data = JSON.parse(json) rescue nil
 if data
   if page['vars']['page'] == 1
     data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages'].times do |i|
-      break
       if i != 0
         url = page['url'] + "&page=#{i + 1}"
         pages << {
