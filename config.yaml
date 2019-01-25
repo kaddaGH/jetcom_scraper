@@ -1,0 +1,15 @@
+seeder:
+  file: ./seeder/seeder.rb
+  disabled: false
+parsers:
+  - page_type: products_listing
+    file: ./parsers/products_listing.rb
+    disabled: false
+  - page_type: product_details
+    file: ./parsers/product_details.rb
+    disabled: false
+exporters:
+  - exporter_name: products_json
+    exporter_type: json
+    collection: products
+    write_mode: pretty_array
