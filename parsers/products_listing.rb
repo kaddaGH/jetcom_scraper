@@ -1,4 +1,6 @@
 require 'uri'
+require './lib/headers'
+
 body = Nokogiri.HTML(content)
 json = body.css('script').find do |el|
   el.text =~ /__NEXT_DATA__/
@@ -7,7 +9,8 @@ end.to_s.scan(/__NEXT_DATA__ =[\n\s]*?(\{[\W\w]+?\})[\n\s]*?module=\{\}/).join
 json = body.at('script:contains("__NEXT_DATA__")').text.scan(/__NEXT_DATA__ =[\n\s]*?(\{.+\})[\n\s]*?(module=\{\}|;)/).first.first  if json.length<1
 
 data = JSON.parse(json) rescue nil
-
+puts(data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages'])
+abort('ee')
 if data
   if page['vars']['page'] == 1
     data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages'].times do |i|
@@ -17,7 +20,7 @@ if data
             page_type: 'products_listing',
             method: 'GET',
             url: url,
-            ua_type: "gb2",
+            headers: ReqHeaders::REQ_HEADER,
             vars: {
                 'input_type' => page['vars']['input_type'],
                 'search_term' => page['vars']['search_term'],
@@ -28,7 +31,7 @@ if data
         }
 
       end
-      break
+
     end
   end
 
@@ -59,7 +62,7 @@ if data
         page_type: 'product_details',
         method: 'GET',
         url: url,
-        ua_type: "gb2",
+        headers: ReqHeaders::REQ_HEADER,
         vars: options
 
     }
