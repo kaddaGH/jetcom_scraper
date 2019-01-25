@@ -27,42 +27,9 @@ if data
 
         }
 
+      end
+      break
     end
-    end
   end
 
 
-
-
-  urls = data['props']['initialState']['entities']['collections']['product']['entities'].map do |id,product|
-    uri = URI::HTTPS.build(
-        host: 'jet.com', path: "/product/#{product['title'].delete('-.,/%"®\\?()').gsub(/\s/,'-').gsub('&','and').gsub(/-{2,}/, '-')}/#{product['id']}",
-        query: URI.encode_www_form([["beaconId", product['beaconId']], ["experienceId", product['experienceId']]])
-    )
-
-    uri.to_s
-  end
-
-  urls.each_with_index do |url,i|
-    scrape_url_nbr_products = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['total']
-    options = {
-        'input_type' => page['vars']['input_type'],
-        'search_term' => page['vars']['search_term'],
-        'SCRAPE_URL_NBR_PRODUCTS' => scrape_url_nbr_products,
-        'rank' => i + 1,
-        'page' => page['vars']['page'],
-    }
-
-    pages << {
-        page_type: 'product_details',
-        method: 'GET',
-        url: url,
-        ua_type: "gb2",
-        vars: options
-
-    }
-
-  end
-
-
-end
