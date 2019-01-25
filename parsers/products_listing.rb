@@ -18,6 +18,7 @@ if data
             page_type: 'products_listing',
             method: 'GET',
             url: url,
+            ua_type: "gb2",
             vars: {
                 'input_type' => page['vars']['input_type'],
                 'search_term' => page['vars']['search_term'],
@@ -57,6 +58,7 @@ if data
         page_type: 'product_details',
         method: 'GET',
         url: url,
+        ua_type: "gb2",
         vars: options
 
     }
