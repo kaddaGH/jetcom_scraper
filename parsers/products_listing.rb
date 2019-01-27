@@ -35,6 +35,7 @@ if data
 
 
   urls = data['props']['initialState']['entities']['collections']['product']['entities'].map do |id, product|
+
     uri = URI::HTTPS.build(
         host: 'jet.com', path: "/product/#{product['title'].delete('-.,/%"®\\?()').gsub(/\s/, '-').gsub('&', 'and').gsub(/-{2,}/, '-')}/#{product['id']}",
         query: URI.encode_www_form([["beaconId", product['beaconId']], ["experienceId", product['experienceId']]])
@@ -43,10 +44,10 @@ if data
     uri.to_s
   end
 
-
+  abort('ff')
 
   urls.each_with_index do |url, i|
-    break 
+
     scrape_url_nbr_products = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['total']
     options = {
         'input_type' => page['vars']['input_type'],
