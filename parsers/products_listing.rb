@@ -15,6 +15,7 @@ if data
     if total_pages.to_i > 1
       i = 2
       while i <= total_pages.to_i do
+        break
         url = page['url'] + "&page=#{i}"
         pages << {
             page_type: 'products_listing',
@@ -43,7 +44,7 @@ if data
   }
 
   body.css('div.core__Box-avlav9-0.eZsrxv a').each do | product|
-    break
+
     url = 'https://jet.com'+product.attr('href')
     options['rank'] =options['rank']+1
     pages << {
