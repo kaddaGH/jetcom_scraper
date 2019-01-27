@@ -15,7 +15,6 @@ if data
     if total_pages.to_i > 1
       i = 2
       while i <= total_pages.to_i do
-        break
         url = page['url'] + "&page=#{i}"
         pages << {
             page_type: 'products_listing',
