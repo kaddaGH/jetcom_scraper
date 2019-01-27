@@ -16,7 +16,6 @@ if data
       i = 2
       while i <= total_pages.to_i do
         url = page['url'] + "&page=#{i}"
-        puts(url)
         pages << {
             page_type: 'products_listing',
             method: 'GET',
@@ -44,7 +43,7 @@ if data
     uri.to_s
   end
 
-  abort('ff')
+
 
   urls.each_with_index do |url, i|
 
@@ -60,7 +59,7 @@ if data
     pages << {
         page_type: 'product_details',
         method: 'GET',
-        url: url+'&search_term='+options['search_term']+'&page='+options['page'],
+        url: url+"&search_term="+options['search_term']+"&page=#{options['page']}",
         headers: ReqHeaders::REQ_HEADER,
         vars: options
 
