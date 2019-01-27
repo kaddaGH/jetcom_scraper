@@ -43,7 +43,10 @@ if data
     uri.to_s
   end
 
+
+
   urls.each_with_index do |url, i|
+    break 
     scrape_url_nbr_products = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['total']
     options = {
         'input_type' => page['vars']['input_type'],
@@ -56,7 +59,7 @@ if data
     pages << {
         page_type: 'product_details',
         method: 'GET',
-        url: url,
+        url: url+'&search_term='+options['search_term']+'&page='+options['page'],
         headers: ReqHeaders::REQ_HEADER,
         vars: options
 
