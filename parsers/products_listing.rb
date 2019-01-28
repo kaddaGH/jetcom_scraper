@@ -9,7 +9,6 @@ end.to_s.scan(/__NEXT_DATA__ =[\n\s]*?(\{[\W\w]+?\})[\n\s]*?module=\{\}/).join
 json = body.at('script:contains("__NEXT_DATA__")').text.scan(/__NEXT_DATA__ =[\n\s]*?(\{.+\})[\n\s]*?(module=\{\}|;)/).first.first if json.length < 1
 
 data = JSON.parse(json) rescue nil
-headers['Cookie'] = page['']
 if data
   if page['vars']['page'] == 1
     total_pages = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages']
