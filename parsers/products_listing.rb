@@ -12,6 +12,7 @@ data = JSON.parse(json) rescue nil
 if data
   if page['vars']['page'] == 1
     total_pages = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages']
+
     if total_pages.to_i > 1
       i = 2
       while i <= total_pages.to_i do
@@ -43,6 +44,7 @@ if data
   }
 
   body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do | product|
+    break 
 
     url = 'https://jet.com'+product.attr('href')
     options['rank'] =options['rank']+1
