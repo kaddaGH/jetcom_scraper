@@ -35,24 +35,23 @@ if data
 
 
   scrape_url_nbr_products = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['total']
-  options = {
-      'input_type' => page['vars']['input_type'],
-      'search_term' => page['vars']['search_term'],
-      'SCRAPE_URL_NBR_PRODUCTS' => scrape_url_nbr_products,
-      'rank' => 0,
-      'page' => page['vars']['page'],
-  }
 
+  rank=0
   body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do | product|
-
     url = 'https://jet.com'+product.attr('href')
-    options['rank'] =options['rank']+1
+    rank=rank+1
     pages << {
         page_type: 'product_details',
         method: 'GET',
-        url: url+"&search_term="+options['search_term']+"&page=#{options['page']}",
-        headers: ReqHeaders::REQ_HEADER,
-        vars: options
+        url: url+"&search_term="+page['vars']['search_term']+"&page=#{page['vars']['page']}",
+        #headers: ReqHeaders::REQ_HEADER,
+        vars: {
+            'input_type' => page['vars']['input_type'],
+            'search_term' => page['vars']['search_term'],
+            'SCRAPE_URL_NBR_PRODUCTS' => scrape_url_nbr_products,
+            'rank' => rank,
+            'page' => page['vars']['page'],
+        }
 
     }
 
