@@ -21,7 +21,7 @@ if data
             page_type: 'products_listing',
             method: 'GET',
             url: url,
-            ua_type: "gb2",
+            headers: ReqHeaders::REQ_HEADER,
             vars: {
                 'input_type' => page['vars']['input_type'],
                 'search_term' => page['vars']['search_term'],
@@ -44,7 +44,7 @@ if data
   }
 
   body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do | product|
-
+    break
 
     url = 'https://jet.com'+product.attr('href')
     options['rank'] =options['rank']+1
@@ -52,8 +52,7 @@ if data
         page_type: 'product_details',
         method: 'GET',
         url: url+"&search_term="+options['search_term']+"&page=#{options['page']}",
-        #headers: ReqHeaders::REQ_HEADER,
-        ua_type: "gb2",
+        headers: ReqHeaders::REQ_HEADER,
         vars: options
 
     }
