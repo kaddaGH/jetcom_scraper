@@ -3,7 +3,7 @@ require './lib/headers'
 pages << {
     page_type: 'products_listing',
     method: 'GET',
-    url: "https://jet.com/search?category=15000017",
+    url: "https://jet.com/search?category=15000017&zipCode=10011",
     headers: ReqHeaders::REQ_HEADER,
     vars: {
         'input_type' => 'taxonomy',
