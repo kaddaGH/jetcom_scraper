@@ -4,7 +4,7 @@ pages << {
     page_type: 'products_listing',
     method: 'GET',
     url: "https://jet.com/search?category=15000017",
-    headers: ReqHeaders::REQ_HEADER,
+    ua_type: "gb2",
     vars: {
         'input_type' => 'taxonomy',
         'search_term' => '-',

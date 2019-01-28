@@ -9,6 +9,7 @@ end.to_s.scan(/__NEXT_DATA__ =[\n\s]*?(\{[\W\w]+?\})[\n\s]*?module=\{\}/).join
 json = body.at('script:contains("__NEXT_DATA__")').text.scan(/__NEXT_DATA__ =[\n\s]*?(\{.+\})[\n\s]*?(module=\{\}|;)/).first.first if json.length < 1
 
 data = JSON.parse(json) rescue nil
+headers['Cookie'] = page['']
 if data
   if page['vars']['page'] == 1
     total_pages = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages']
@@ -21,7 +22,7 @@ if data
             page_type: 'products_listing',
             method: 'GET',
             url: url,
-            headers: ReqHeaders::REQ_HEADER,
+            ua_type: "gb2",
             vars: {
                 'input_type' => page['vars']['input_type'],
                 'search_term' => page['vars']['search_term'],
@@ -44,7 +45,7 @@ if data
   }
 
   body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do | product|
-    break 
+
 
     url = 'https://jet.com'+product.attr('href')
     options['rank'] =options['rank']+1
@@ -52,7 +53,8 @@ if data
         page_type: 'product_details',
         method: 'GET',
         url: url+"&search_term="+options['search_term']+"&page=#{options['page']}",
-        headers: ReqHeaders::REQ_HEADER,
+        #headers: ReqHeaders::REQ_HEADER,
+        ua_type: "gb2",
         vars: options
 
     }
