@@ -44,7 +44,7 @@ if data
         page_type: 'product_details',
         method: 'GET',
         url: url+"&search_term="+page['vars']['search_term']+"&page=#{page['vars']['page']}",
-        #headers: ReqHeaders::REQ_HEADER,
+        headers: ReqHeaders::REQ_HEADER,
         vars: {
             'input_type' => page['vars']['input_type'],
             'search_term' => page['vars']['search_term'],
