@@ -44,8 +44,7 @@ if data
   }
 
   body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do | product|
-    break
-
+    
     url = 'https://jet.com'+product.attr('href')
     options['rank'] =options['rank']+1
     pages << {
