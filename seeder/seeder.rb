@@ -1,12 +1,26 @@
 require 'uri'
 require './lib/headers'
+pages << {
+    page_type: 'products_listing',
+    method: 'GET',
+    url: "https://jet.com/search?category=15000017&page=1",
+    headers: ReqHeaders::REQ_HEADER,
+    vars: {
+        'input_type' => 'taxonomy',
+        'search_term' => '-',
+        'page' => 1,
+        'products_urls'=>[]
+    }
 
+
+}
 search_terms = [
-
+    'Red Bull',
+    'RedBull',
     'Energy Drink',
     'Energy Drinks',
 ]
-search_terms.take(1).each do |search_term|
+search_terms.each do |search_term|
 
   pages << {
       page_type: 'products_listing',
