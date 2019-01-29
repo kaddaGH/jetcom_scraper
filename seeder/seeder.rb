@@ -8,7 +8,8 @@ pages << {
     vars: {
         'input_type' => 'taxonomy',
         'search_term' => '-',
-        'page' => 1
+        'page' => 1,
+        'products_urls'=>[]
     }
 
 

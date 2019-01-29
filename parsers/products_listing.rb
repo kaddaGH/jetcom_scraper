@@ -10,53 +10,40 @@ json = body.at('script:contains("__NEXT_DATA__")').text.scan(/__NEXT_DATA__ =[\n
 
 data = JSON.parse(json) rescue nil
 if data
-  if page['vars']['page'] == 1
-    total_pages = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages']
-
-    if total_pages.to_i > 1
-      i = 2
-      while i <= total_pages.to_i do
-        url = page['url'] + "&zipCode=10011&page=#{i}"
-        pages << {
-            page_type: 'products_listing',
-            method: 'GET',
-            url: url,
-            headers: ReqHeaders::REQ_HEADER,
-            vars: {
-                'input_type' => page['vars']['input_type'],
-                'search_term' => page['vars']['search_term'],
-                'page' => i
-            }
-        }
-        i += 1
-      end
+  total_pages = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages']
+  current_page = page['vars']['page']
+  products_urls = page['vars']['products_urls']
+  if current_page < total_pages
+    # get the products
+    rank=0
+    body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do | product|
+      url = 'https://jet.com'+product.attr('href')
+      rank=rank+1
+      products_urls << {
+          url: url+"&search_term="+page['vars']['search_term']+"&page=#{page['vars']['page']}",
+          vars: {
+              'rank' => rank,
+              'page' => current_page,
+          }
+      }
     end
-  end
 
-
-  scrape_url_nbr_products = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['total']
-  rank=0
-  body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do | product|
-    break
-    url = 'https://jet.com'+product.attr('href')
-    rank=rank+1
+     # queue next page
+    url = page['url'] + "&zipCode=10011&page=#{current_page+1}"
     pages << {
-        page_type: 'product_details',
+        page_type: 'products_listing',
         method: 'GET',
-        url: url+"&search_term="+page['vars']['search_term']+"&page=#{page['vars']['page']}",
+        url: url,
         headers: ReqHeaders::REQ_HEADER,
         vars: {
             'input_type' => page['vars']['input_type'],
             'search_term' => page['vars']['search_term'],
-            'SCRAPE_URL_NBR_PRODUCTS' => scrape_url_nbr_products,
-            'rank' => rank,
-            'page' => page['vars']['page'],
+            'page' => current_page+1,
+            'products_urls'=>products_urls
         }
-
     }
-
-  end
   end
 
+  end
 
-
+    # if it's last page proccess all scraped products urls
