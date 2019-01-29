@@ -12,7 +12,7 @@ products = data['props']['initialState']['entities']['collections']['product']['
 if data && products
 
   prices = data['props']['initialState']['entities']['collections']['productPrice']['entities']
-  id = page['url'].split('/').last.split('#').first.gsub(/&.+?\Z/,'')
+  id = page['url'].split('/').last.split('#').first.gsub(/\?.+?\Z/,'')
 
   title = (products[id] || products.first[1])['title']
   [
