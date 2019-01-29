@@ -35,9 +35,9 @@ if data
 
 
   scrape_url_nbr_products = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['total']
-
   rank=0
   body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do | product|
+    break
     url = 'https://jet.com'+product.attr('href')
     rank=rank+1
     pages << {
