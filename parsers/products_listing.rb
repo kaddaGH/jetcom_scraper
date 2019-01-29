@@ -60,7 +60,7 @@ if data
       pages << {
           page_type: 'product_details',
           method: 'GET',
-          url: product['url'] + "&search_term=" + page['vars']['search_term'] + "&page=#{page['vars']['page']}",
+          url: product['url'],
           headers: ReqHeaders::REQ_HEADER,
           vars: {
               'input_type' => page['vars']['input_type'],
