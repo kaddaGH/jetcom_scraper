@@ -29,7 +29,7 @@ if data
     end
 
      # queue next page
-    url = page['url'].gsub(/page=\d+/,page=current_page+1)
+    url = page['url'].gsub(/page=\d+/,"page=#{current_page+1}")
     pages << {
         page_type: 'products_listing',
         method: 'GET',
