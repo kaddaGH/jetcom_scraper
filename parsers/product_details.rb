@@ -16,39 +16,41 @@ if data && products
 
   title = (products[id] || products.first[1])['title']
   [
-      /(\d*[\.,]?\d+)\s?([Ff][Ll]\.?\s?[Oo][Zz])/,
-      /(\d*[\.,]?\d+)\s?([Oo][Zz])/,
-      /(\d*[\.,]?\d+)\s?([Ff][Oo])/,
-      /(\d*[\.,]?\d+)\s?([Ee][Aa])/,
-      /(\d*[\.,]?\d+)\s?([Ff][Zz])/,
-      /(\d*[\.,]?\d+)\s?(Fluid Ounces?)/,
-      /(\d*[\.,]?\d+)\s?([Oo]unce)/,
-      /(\d*[\.,]?\d+)\s?([Pp]ounds)/,
-      /(\d*[\.,]?\d+)\s?([Cc][Ll])/,
-      /(\d*[\.,]?\d+)\s?([Mm][Ll])/,
-      /(\d*[\.,]?\d+)\s?([Ll])/,
-      /(\d*[\.,]?\d+)\s?([Gg])/,
-      /(\d*[\.,]?\d+)\s?([Ll]itre)/,
-      /(\d*[\.,]?\d+)\s?((Single\s)?[Ss]ervings?)/,
-      /(\d*[\.,]?\d+)\s?([Pp]acket\(?s?\)?)/,
-      /(\d*[\.,]?\d+)\s?([Cc]apsules)/,
-      /(\d*[\.,]?\d+)\s?([Tt]ablets)/,
-      /(\d*[\.,]?\d+)\s?([Tt]ubes)/,
-      /(\d*[\.,]?\d+)\s?([Cc]hews)/
+      /(\d*[\.,]?\d+)[-\s]*?([Ff][Ll]\.?[-\s]*?[Oo][Zz])/,
+      /(\d*[\.,]?\d+)[-\s]*?([Oo][Zz])/,
+      /(\d*[\.,]?\d+)[-\s]*?([Ff][Oo])/,
+      /(\d*[\.,]?\d+)[-\s]*?([Ee][Aa])/,
+      /(\d*[\.,]?\d+)[-\s]*?([Ff][Zz])/,
+      /(\d*[\.,]?\d+)[-\s]*?(Fluid Ounces?)/,
+      /(\d*[\.,]?\d+)[-\s]*?([Oo]unce)/,
+      /(\d*[\.,]?\d+)[-\s]*?([Pp]ounds)/,
+      /(\d*[\.,]?\d+)[-\s]*?([Cc][Ll])/,
+      /(\d*[\.,]?\d+)[-\s]*?([Mm][Ll])/,
+      /(\d*[\.,]?\d+)[-\s]*?([Ll][Bb][Ss])/,
+      /(\d*[\.,]?\d+)[-\s]*?([Ll][Bb])/,
+      /(\d*[\.,]?\d+)[-\s]*?([Ll])/,
+      /(\d*[\.,]?\d+)[-\s]*?([Gg])/,
+      /(\d*[\.,]?\d+)[-\s]*?([Ll]itre)/,
+      /(\d*[\.,]?\d+)[-\s]*?((Single\s)?[Ss]ervings?)/,
+      /(\d*[\.,]?\d+)[-\s]*?([Pp]acket\(?s?\)?)/,
+      /(\d*[\.,]?\d+)[-\s]*?([Cc]apsules)/,
+      /(\d*[\.,]?\d+)[-\s]*?([Tt]ablets)/,
+      /(\d*[\.,]?\d+)[-\s]*?([Tt]ubes)/,
+      /(\d*[\.,]?\d+)[-\s]*?([Cc]hews)/
   ].find { |regexp| title =~ regexp }
   item_size = $1
   uom = $2
 
   match = [
-      /(\d+)\s?[xX]/,
+      /(\d+)[-\s]*?[xX]/,
       /Pack of (\d+)/,
       /Box of (\d+)/,
       /Case of (\d+)/,
       /Count of (\d+)/,
-      /(\d+)\s?[Cc]ount/,
-      /(\d+)\s?[Cc][Tt]/,
+      /(\d+)[-\s]*?[Cc]ount/,
+      /(\d+)[-\s]*?[Cc][Tt]/,
       /(\d+)[\s-]?Pack($|[^e])/,
-      /(\d+)\s?[Pp][Kk]/
+      /(\d+)[-\s]*?[Pp][Kk]/
   ].find { |regexp| title =~ regexp }
   in_pack = match ? $1 : '1'
 
