@@ -29,7 +29,7 @@ if data
     end
 
      # queue next page
-    url = page['url'] + "&zipCode=10011&page=#{current_page+1}"
+    url = page['url'].gsub(/page=\d+/,page=current_page+1)
     pages << {
         page_type: 'products_listing',
         method: 'GET',
@@ -42,8 +42,31 @@ if data
             'products_urls'=>products_urls
         }
     }
-  end
+
+  # if it's last page proccess all scraped products urls
+  elsif current_page >= total_pages
+    # get the products
+    rank=0
+    body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do | product|
+      url = 'https://jet.com'+product.attr('href')
+      rank=rank+1
+      products_urls << {
+          url: url+"&search_term="+page['vars']['search_term']+"&page=#{page['vars']['page']}",
+          vars: {
+              'rank' => rank,
+              'page' => current_page,
+          }
+      }
+    end
+
+
+    puts(products_urls.length )
 
   end
 
-    # if it's last page proccess all scraped products urls
+
+
+
+  end
+
+
