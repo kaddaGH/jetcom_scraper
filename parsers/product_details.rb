@@ -57,7 +57,7 @@ if data && products
   description = [
       (product_details[id] || product_details.first[1])['description'],
       (product_details[id] || product_details.first[1])['bullets']
-  ].join(' ').gsub(/<("[^"]*"|'[^']*'|[^'">])*>/, '').gsub(/,/, ' ')
+  ].join(' ').gsub(/<("[^"]*"|'[^']*'|[^'">])*>/, '').gsub(/[\n\s,]+/, ' ')
 
   if item_size.nil? && uom.nil?
     description.scan(/(\d{1,3})(ml) Bottle Size/)
