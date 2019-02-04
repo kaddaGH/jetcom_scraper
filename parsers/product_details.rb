@@ -69,6 +69,12 @@ if data && products
 
   upc_code = body.to_s.match(/"upc":"(\d+)"/)[1] rescue ''
 
+  product_image = (products[id] || products.first[1])['image']['raw']
+  if product_image.length>1
+    product_image = 'http://162.243.94.227/imagesproxy/proxy.php?url='+product_image
+  end
+
+
   info = {
         RETAILER_ID: '0001',
         RETAILER_NAME: 'jet.com',
@@ -84,7 +90,7 @@ if data && products
         PRODUCT_ID: id,
         PRODUCT_NAME: title,
         PRODUCT_DESCRIPTION: CGI.unescapeHTML(description),
-        PRODUCT_MAIN_IMAGE_URL: (products[id] || products.first[1])['image']['raw'],
+        PRODUCT_MAIN_IMAGE_URL: product_image,
         PRODUCT_ITEM_SIZE: (item_size rescue ''),
         PRODUCT_ITEM_SIZE_UOM: (uom rescue ''),
         PRODUCT_ITEM_QTY_IN_PACK: (in_pack rescue ''),
