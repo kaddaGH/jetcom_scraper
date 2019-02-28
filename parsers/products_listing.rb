@@ -2,21 +2,19 @@ require 'uri'
 require './lib/headers'
 
 body = Nokogiri.HTML(content)
-json = body.css('script').find do |el|
-  el.text =~ /__NEXT_DATA__/
-end.to_s.scan(/__NEXT_DATA__ =[\n\s]*?(\{[\W\w]+?\})[\n\s]*?module=\{\}/).join
 
-json = body.at('script:contains("__NEXT_DATA__")').text.scan(/__NEXT_DATA__ =[\n\s]*?(\{.+\})[\n\s]*?(module=\{\}|;)/).first.first if json.length < 1
+json =body.at('#__NEXT_DATA__').text
 
 data = JSON.parse(json) rescue nil
 if data
   total_pages = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages']
+
   current_page = page['vars']['page']
   products_urls = page['vars']['products_urls']
   if current_page < total_pages
     # get the products
     rank = 0
-    body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do |product|
+    body.css('a.BaseProductTile__ItemLink-mors47-0').each do |product|
       url = 'https://jet.com' + product.attr('href')
       rank = rank + 1
       products_urls << {
