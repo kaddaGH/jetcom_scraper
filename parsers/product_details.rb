@@ -1,11 +1,6 @@
 body = Nokogiri.HTML(content)
 
-json = body.css('script').find do |el|
-  el.text =~ /__NEXT_DATA__/
-end.to_s.scan(/__NEXT_DATA__ =[\n\s]*?(\{[\W\w]+?\})[\n\s]*?module=\{\}/).join
-
-json = body.at('script:contains("__NEXT_DATA__")').text.scan(/__NEXT_DATA__ =[\n\s]*?(\{.+\})[\n\s]*?(module=\{\}|;)/).first.first if json.length<1
-
+json =body.at('#__NEXT_DATA__').text
 data = JSON.parse(json) rescue nil
 
 products = data['props']['initialState']['entities']['collections']['product']['entities'] rescue nil
