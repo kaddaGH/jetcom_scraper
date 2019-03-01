@@ -76,7 +76,7 @@ if data
       end
 
 
-      if page['vars']['search_term'] == 'Energy+Drinks'
+      if page['vars']['search_term'] == 'Energy Drinks'
         if product['rank'] == 3 and product['page'] == 8
 
           product['url'] =product['url'].gsub(/st=6/, "st=7")
@@ -91,7 +91,7 @@ if data
       end
 
 
-      if page['vars']['search_term'] == 'Energy+Drink'
+      if page['vars']['search_term'] == 'Energy Drink'
         if product['rank'] == 13 and product['page'] == 3
 
           product['url'] = product['url'].gsub(/st=6/, "st=7")
