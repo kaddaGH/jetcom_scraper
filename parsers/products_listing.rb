@@ -3,7 +3,7 @@ require './lib/headers'
 
 body = Nokogiri.HTML(content)
 
-json =body.at('#__NEXT_DATA__').text
+json = body.at('#__NEXT_DATA__').text
 
 data = JSON.parse(json) rescue nil
 if data
@@ -19,7 +19,7 @@ if data
       url = 'https://jet.com' + product.attr('href')
       rank = rank + 1
       products_urls << {
-          'url' => url+"&st=5&search_term="+page['vars']['search_term']+"&page=#{current_page}&rank=#{rank}",
+          'url' => url + "&st=6&search_term=" + page['vars']['search_term'] + "&page=#{current_page}&rank=#{rank}",
           'rank' => rank,
           'page' => current_page
 
@@ -49,7 +49,7 @@ if data
       url = 'https://jet.com' + product.attr('href')
       rank = rank + 1
       products_urls << {
-          'url' => url + "&search_term=" + page['vars']['search_term'] + "&st=5&page=#{page['vars']['page']}&rank=#{rank}",
+          'url' => url + "&search_term=" + page['vars']['search_term'] + "&st=6&page=#{page['vars']['page']}&rank=#{rank}",
           'rank' => rank,
           'page' => current_page
       }
@@ -58,24 +58,21 @@ if data
 
     products_urls.each do |product|
 
-      if product['page']==3 and product['rank']==1
-        
-        pages << {
-            page_type: 'product_details',
-            method: 'GET',
-            url: product['url'],
-            headers: ReqHeaders::REQ_HEADER,
-            vars: {
-                'input_type' => page['vars']['input_type'],
-                'search_term' => page['vars']['search_term'],
-                'SCRAPE_URL_NBR_PRODUCTS' => scrape_url_nbr_products,
-                'rank' => product['rank'],
-                'page' => product['page']
-            }
 
-        }
-      end
+      pages << {
+          page_type: 'product_details',
+          method: 'GET',
+          url: product['url'],
+          headers: ReqHeaders::REQ_HEADER,
+          vars: {
+              'input_type' => page['vars']['input_type'],
+              'search_term' => page['vars']['search_term'],
+              'SCRAPE_URL_NBR_PRODUCTS' => scrape_url_nbr_products,
+              'rank' => product['rank'],
+              'page' => product['page']
+          }
 
+      }
 
 
     end
