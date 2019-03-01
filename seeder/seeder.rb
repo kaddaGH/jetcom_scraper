@@ -3,7 +3,7 @@ require './lib/headers'
 pages << {
     page_type: 'products_listing',
     method: 'GET',
-    url: "https://jet.com/search?category=15000017&page=1&st=4",
+    url: "https://jet.com/search?category=15000017&page=1&st=5",
     headers: ReqHeaders::REQ_HEADER,
     vars: {
         'input_type' => 'taxonomy',
@@ -25,7 +25,7 @@ search_terms.each do |search_term|
   pages << {
       page_type: 'products_listing',
       method: 'GET',
-      url:'https://jet.com/search?page=1&st=4&term='+ URI.encode(search_term),
+      url:'https://jet.com/search?page=1&st=5&term='+ URI.encode(search_term),
       headers: ReqHeaders::REQ_HEADER,
       vars: {
           'input_type' => 'search',
