@@ -103,5 +103,5 @@ if data && products
   info['_collection'] = "products"
 
   end
-
+puts(info['_collection'])
 outputs << info
