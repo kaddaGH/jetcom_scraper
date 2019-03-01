@@ -18,7 +18,7 @@ if data
       url = 'https://jet.com' + product.attr('href')
       rank = rank + 1
       products_urls << {
-          'url' => url+"&search_term="+page['vars']['search_term']+"&page=#{current_page}&rank=#{rank}",
+          'url' => url+"&st=5&search_term="+page['vars']['search_term']+"&page=#{current_page}&rank=#{rank}",
           'rank' => rank,
           'page' => current_page
 
