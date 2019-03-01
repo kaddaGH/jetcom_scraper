@@ -58,20 +58,24 @@ if data
 
     products_urls.each do |product|
 
-      pages << {
-          page_type: 'product_details',
-          method: 'GET',
-          url: product['url'],
-          headers: ReqHeaders::REQ_HEADER,
-          vars: {
-              'input_type' => page['vars']['input_type'],
-              'search_term' => page['vars']['search_term'],
-              'SCRAPE_URL_NBR_PRODUCTS' => scrape_url_nbr_products,
-              'rank' => product['rank'],
-              'page' => product['page']
-          }
+      if product['page']==3 and product['rank']==1
+        
+        pages << {
+            page_type: 'product_details',
+            method: 'GET',
+            url: product['url'],
+            headers: ReqHeaders::REQ_HEADER,
+            vars: {
+                'input_type' => page['vars']['input_type'],
+                'search_term' => page['vars']['search_term'],
+                'SCRAPE_URL_NBR_PRODUCTS' => scrape_url_nbr_products,
+                'rank' => product['rank'],
+                'page' => product['page']
+            }
 
-      }
+        }
+      end
+
 
 
     end
