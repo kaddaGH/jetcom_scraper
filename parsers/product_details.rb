@@ -100,7 +100,7 @@ if data && products
     }
 
 
-info['_collection'] = 'products'
+  info['_collection'] = "products"
 
   end
 
