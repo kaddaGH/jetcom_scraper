@@ -10,6 +10,8 @@ if data
   total_pages = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages']
   current_page = page['vars']['page']
   products_urls = page['vars']['products_urls']
+
+
   if current_page < total_pages
     # get the products
     rank = 0
@@ -43,7 +45,7 @@ if data
   elsif current_page >= total_pages
     # get the products
     rank = 0
-    body.css('div.core__Box-avlav9-0.eZsrxv a.BaseProductTile__ItemLink-mors47-0').each do |product|
+    body.css('a.BaseProductTile__ItemLink-mors47-0').each do |product|
       url = 'https://jet.com' + product.attr('href')
       rank = rank + 1
       products_urls << {
@@ -53,8 +55,9 @@ if data
       }
     end
     scrape_url_nbr_products = products_urls.length
+
     products_urls.each do |product|
-      break 
+
       pages << {
           page_type: 'product_details',
           method: 'GET',
