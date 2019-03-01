@@ -58,26 +58,46 @@ if data
 
     products_urls.each do |product|
 
-      if product['url'].include?"page=7&rank=1&search_term=-&st=6"
-        product['url'].gsub(/st=6/,"st=7")
+
+      if page['vars']['search_term'] == '-'
+
+        if product['rank'] == 1 and product['page'] == 7
+
+          product['url'] = product['url'].gsub(/st\=6/, "st=7")
+
+        end
+
+        if product['rank'] == 8 and product['page'] == 1
+
+          product['url'] =product['url'].gsub(/st=6/, "st=7")
+        end
+
+
       end
 
 
-      if product['url'].include?"page=1&rank=8&search_term=-&st=6"
-        product['url'].gsub(/st=6/,"st=7")
+      if page['vars']['search_term'] == 'Energy+Drinks'
+        if product['rank'] == 3 and product['page'] == 8
+
+          product['url'] =product['url'].gsub(/st=6/, "st=7")
+        end
+
+        if product['rank'] == 13 and product['page'] == 3
+
+          product['url'] =product['url'].gsub(/st=6/, "st=7")
+        end
+
+
       end
 
-      if product['url'].include?"page=8&rank=3&search_term=Energy+Drinks&st=6"
-        product['url'].gsub(/st=6/,"st=7")
-      end
+
+      if page['vars']['search_term'] == 'Energy+Drink'
+        if product['rank'] == 13 and product['page'] == 3
+
+          product['url'] = product['url'].gsub(/st=6/, "st=7")
+        end
 
 
-      if product['url'].include?"page=6&rank=11&search_term=Energy+Drink&st=6"
-        product['url'].gsub(/st=6/,"st=7")
-      end
-
-      if product['url'].include?"page=3&rank=13&search_term=Energy+Drinks&st=6"
-        product['url'].gsub(/st=6/,"st=7")
       end
 
 
