@@ -58,6 +58,28 @@ if data
 
     products_urls.each do |product|
 
+      if product['url'].include?"page=7&rank=1&search_term=-&st=6"
+        product['url'].gsub("st=6","st=7")
+      end
+
+
+      if product['url'].include?"page=1&rank=8&search_term=-&st=6"
+        product['url'].gsub("st=6","st=7")
+      end
+
+      if product['url'].include?"page=8&rank=3&search_term=Energy+Drinks&st=6"
+        product['url'].gsub("st=6","st=7")
+      end
+
+
+      if product['url'].include?"page=6&rank=11&search_term=Energy+Drink&st=6"
+        product['url'].gsub("st=6","st=7")
+      end
+
+      if product['url'].include?"page=3&rank=13&search_term=Energy+Drinks&st=6"
+        product['url'].gsub("st=6","st=7")
+      end
+
 
       pages << {
           page_type: 'product_details',
