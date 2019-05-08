@@ -3,7 +3,10 @@ require './lib/headers'
 
 body = Nokogiri.HTML(content)
 
-json = body.at('#__NEXT_DATA__').text
+
+json = body.at('#tb-djs-NEXT_DATA').text
+
+
 
 data = JSON.parse(json) rescue nil
 if data
@@ -15,7 +18,7 @@ if data
   if current_page < total_pages
     # get the products
     rank = 0
-    body.css('a.BaseProductTile__ItemLink-mors47-0').each do |product|
+    body.css('a.BaseProductTile__ItemLink-sc-1h29u1u-0').each do |product|
       url = 'https://jet.com' + product.attr('href')
       rank = rank + 1
       products_urls << {
