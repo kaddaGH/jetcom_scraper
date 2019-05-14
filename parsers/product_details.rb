@@ -1,6 +1,6 @@
 body = Nokogiri.HTML(content)
 
-json =body.at('#__NEXT_DATA__').text
+json =body.at('#tb-djs-NEXT_DATA').text
 data = JSON.parse(json) rescue nil
 
 products = data['props']['initialState']['entities']['collections']['product']['entities'] rescue nil
