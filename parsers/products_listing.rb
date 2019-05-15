@@ -9,6 +9,7 @@ json = body.at('#tb-djs-NEXT_DATA').text
 
 
 data = JSON.parse(json) rescue nil
+
 if data
   total_pages = data['props']['initialState']['entities']['singles']['search']['value']['filterState']['totalPages']
   current_page = page['vars']['page']
@@ -44,11 +45,13 @@ if data
         }
     }
 
+
     # if it's last page proccess all scraped products urls
   elsif current_page >= total_pages
+
     # get the products
     rank = 0
-    body.css('a.BaseProductTile__ItemLink-mors47-0').each do |product|
+    body.css('a.BaseProductTile__ItemLink-sc-1h29u1u-0').each do |product|
       url = 'https://jet.com' + product.attr('href')
       rank = rank + 1
       products_urls << {
@@ -57,8 +60,9 @@ if data
           'page' => current_page
       }
     end
-    scrape_url_nbr_products = products_urls.length
 
+
+    scrape_url_nbr_products = products_urls.length
     products_urls.each do |product|
 
 
