@@ -55,7 +55,7 @@ if data
       url = 'https://jet.com' + product.attr('href')
       rank = rank + 1
       products_urls << {
-          'url' => url + "&search_term=" + page['vars']['search_term'] + "&st=6&page=#{page['vars']['page']}&rank=#{rank}",
+          'url' => url + "&search_term=" + page['vars']['search_term'] + "&page=#{page['vars']['page']}&rank=#{rank}",
           'rank' => rank,
           'page' => current_page
       }
@@ -64,50 +64,7 @@ if data
 
     scrape_url_nbr_products = products_urls.length
     products_urls.each do |product|
-
-
-      if page['vars']['search_term'] == '-'
-
-        if product['rank'] == 1 and product['page'] == 7
-
-          product['url'] = product['url'].gsub(/st\=6/, "st=7")
-
-        end
-
-        if product['rank'] == 8 and product['page'] == 1
-
-          product['url'] =product['url'].gsub(/st=6/, "st=7")
-        end
-
-
-      end
-
-
-      if page['vars']['search_term'] == 'Energy Drinks'
-        if product['rank'] == 3 and product['page'] == 8
-
-          product['url'] =product['url'].gsub(/st=6/, "st=7")
-        end
-
-        if product['rank'] == 13 and product['page'] == 3
-
-          product['url'] =product['url'].gsub(/st=6/, "st=7")
-        end
-
-
-      end
-
-
-      if page['vars']['search_term'] == 'Energy Drink'
-        if product['rank'] == 13 and product['page'] == 3
-
-          product['url'] = product['url'].gsub(/st=6/, "st=7")
-        end
-
-
-      end
-
-
+      
       pages << {
           page_type: 'product_details',
           method: 'GET',
