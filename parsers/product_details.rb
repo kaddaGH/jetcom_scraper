@@ -42,6 +42,7 @@ if data && products
       /Box of (\d+)/,
       /Case of (\d+)/,
       /Count of (\d+)/,
+      /(\d+)[-\s]*?Drinks/,
       /(\d+)[-\s]*?[Cc]ount/,
       /(\d+)[-\s]*?[Cc][Tt]/,
       /(\d+)[\s-]?Pack($|[^e])/,
